@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sistema Control de Inventarios - Perimercados</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body>
+<div class="expand header">
+	<div class="container">
+		<div class="logo col-xs-4 col-sm-6 col-md-6 col-lg-6 row"><img src="images/logo_peri.png"/></div>
+		<div class="title col-xs-8 col-sm-6 col-md-6 col-lg-6 row"><p>Sistema Control de Inventario</p></div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="col-xs-12 row">
+		<a href="#" class="close-session">Cerrar Sesion</a>
+	</div>
+	<div class="col-xs-12 row form-busqueda">
+			<form id="buscar-producto" name="buscar-producto" method="post" action="realizar-consulta.php">
+				
+	           	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+	           		<label class="clearfix" for='nombre'>Buscar Nombre:</label>
+						 <input class="clearfix rounded" type="text" name="nombre" id="nombre" placeholder="Nombre de producto" required/>
+	          	</div>
+	          	
+	           	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+	           	<label class="clearfix" for='nombre'>Ordenar por:</label>
+	           	<div class="col-xs-12 select_join">
+	           	<select name="Ordenar" id="Ordenar">
+	           		<option value="NOMB">Nombre</option>
+	           		<option value="ID">ID</option>
+	           		<option value="CANT">Cantidad</option>
+	           	</select>
+	           </div>
+	           	</div>
+	           	
+	           	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+	           	<label class="clearfix" for='nombre'>Buscar por:</label>
+	           	<div class="col-xs-12 select_join">
+	           	<select name="Buscar-por" id="buscar-por">
+	           		<option value="NOMB">Nombre</option>
+	           		<option value="ID">ID</option>
+	           		<option value="CANT">Cantidad</option>
+	           	</select>
+	           </div>
+	           	</div>
+				<button class="rounded buscar" type='submit'>Buscar</button>
+			</form>
+	</div>		
+</div>
+
+</body>
+
+</html>
