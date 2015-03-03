@@ -23,12 +23,20 @@
 	margin: 14px 0px 0px 0px;
 }
 
+* a:hover{ color:#666; }
+
 .close-session{
 	background: url(../images/cerrar_sesion.gif) no-repeat top left;
 	padding: 2px 0px 1px 26px;
 	color: #666;
 	float: right;
 	margin-top: 10px;
+}
+
+.new-product{
+  background: url(../images/addProduct-icon.gif) no-repeat top left;
+  padding: 0px 0px 0px 26px;
+  color: #666;
 }
 
 .rounded {
@@ -82,14 +90,81 @@
 .form-busqueda button {
   width: 135px;
   height: 43px;
-  background-color: #d9090b;
-  border-color: #d9090b;
-  border: 1px solid;
   color: #fff;
   font-size: 1em;
   margin-top: 21px;
   float: right;
   margin-right: 10px;
+}
+
+.buscar{
+  background-color: #d9090b;
+  border-color: #d9090b;
+  border: 1px solid;
+}
+
+.guardar{
+  background-color: #2d8812;
+  border-color: #2d8812;
+  border: 1px solid;
+}
+
+table.results {
+  font-family: helvetica, arial;
+  font-size: 0.750em;
+  background-color: #ececec;
+  width: 100%;
+  margin-top: 10px;
+}
+/* line 199, ../sass/default.scss */
+table.results tr.head {
+  background-color: #e0e0e0;
+  font-weight: bold;
+  text-align: center;
+}
+
+table.results tr.head td, table.results tr td{
+  padding: 5px;
+}
+
+/* line 203, ../sass/default.scss */
+table.results tr:nth-child(even) {
+  background-color: #f4f4f4;
+}
+/* line 206, ../sass/default.scss */
+table.results a.see {
+  background: url(../images/ver-icon.png) no-repeat;
+  display: block;
+  text-indent: -9999px;
+  height: 19px;
+  width: 19px;
+  margin: 0 auto;
+}
+/* line 213, ../sass/default.scss */
+table.results a.edit {
+  background: url(../images/edit-icon.png) no-repeat;
+  display: block;
+  text-indent: -9999px;
+  height: 19px;
+  width: 19px;
+  margin: 0 auto;
+}
+/* line 220, ../sass/default.scss */
+table.results a.delete {
+  background: url(../images/delete-icon.png) no-repeat;
+  display: block;
+  text-indent: -9999px;
+  height: 19px;
+  width: 19px;
+  text-align: center;
+  cursor: pointer;
+  cursor: hand;
+  margin: 0 auto;
+}
+
+.add-product-form{
+  background: #FFF;
+  min-height: 400px;
 }
 
 @media (max-width: 549px) {
