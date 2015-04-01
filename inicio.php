@@ -1,3 +1,28 @@
+<?php
+include("php/session.php");
+ini_set('display_errors','off');
+ini_set('display_startup_errors','off');
+error_reporting(0);
+
+function Conectarse(){
+
+	if(!($link=mysql_connect('SupermercadoOS.db.4684682.hostedresource.com','SupermercadoOS','Sup3rm3rc4d0!')))
+	{
+		echo "Error conectando a la base de datos";
+		exit();
+	}
+	if(!mysql_select_db("SupermercadoOS",$link))
+	{
+		echo "Error seleccionando base de datos";
+		exit();
+	}
+	return $link;
+}
+
+$con = Conectarse();
+
+$result = mysql_query("SELECT * FROM productos", $con);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +41,6 @@
 		<div class="title col-xs-8 col-sm-6 col-md-6 col-lg-6 row"><p>Sistema Control de Inventario</p></div>
 	</div>
 </div>
-
 <div class="container">
 	<div class="col-xs-12 row">
 		<a href="#" class="close-session">Cerrar Sesion</a>
@@ -67,37 +91,41 @@
     <td width="8%">Eliminar</td>
     <td width="8%">Ver</td>
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td><a class="see" href="">Ver</a></td>
-    <td><a class="edit" href="">update</a></td>
-    <td><a id="dialogSencillo" class="delete">delete</a></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-</table>
-</div>
-</div>
+<?php 
+if ($row = mysql_fetch_array($result)){
+   do { ?>
 
+   <tr>
+   <td><?php echo utf8_encode($row['id_prod']); ?></td>
+   <td><?php echo utf8_encode($row['nombre_prod']); ?></td>
+   <td><?php echo utf8_encode($row['cantidad_prod']); ?></td>
+   <td><?php echo utf8_encode($row['descr_prod']); ?></td>
+   <td align="center"><a class="see" href="ver-persona.php?id=<?php echo $row['ID']; ?>">Ver</a></td>
+   <td align="center"><a class="edit" href="editar-persona.php?id=<?php echo $row['ID']; ?>">update</a></td>
+   <td align="center"><a id="dialogSencillo" class="delete">delete</a></td>
+   </tr>
+<?php
+}
+while ($row = mysql_fetch_array($result)); 
+   echo "</table> \n"; 
+} else { 
+
+echo '<div class="error-login">¡ No se ha encontrado ningun registro !</div>'; 
+
+} 
+
+?>
+</div>
+</div>
+<?php
+	if($_GET["message"] == "true"){
+		echo '<div class="message true">Producto agregado correctamente<br/></div>';
+	}
+	if($_GET["message"] == "false"){
+		echo '<div class="message false">Error al agregar producto<br/></div>';
+	}
+	else{}
+?>
 <div class="modal fade" id="Add-Product-Form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -106,7 +134,7 @@
         <h4 class="modal-title" id="myModalLabel">Agregar un nuevo producto</h4>
       </div>
       <div class="modal-body row form-busqueda">
-        <form id="agregar-producto" name="buscar-producto" method="post" action="agregar-producto.php">
+        <form id="agregar-producto" name="buscar-producto" method="post" action="php/agregar-producto.php">
 				
 	           	<div class="col-xs-12">
 	           		<label class="clearfix" for='nombre'>ID Producto:</label>
@@ -115,26 +143,26 @@
 
 	          	<div class="col-xs-12">
 	           		<label class="clearfix" for='nombre'>Nombre de Producto:</label>
-						 <input class="clearfix rounded" type="text" name="nombre" id="nombre" placeholder="Nombre de producto" required/>
+						 <input class="clearfix rounded" type="text" name="nombre-prod" id="nombre-prod" placeholder="Nombre de producto" required/>
 	          	</div>
 
 	          	<div class="col-xs-12">
 	           		<label class="clearfix" for='nombre'>Cantidad:</label>
-						 <input class="clearfix rounded" type="text" name="cantidad" id="cantidad" placeholder="Cantidad" required/>
+						 <input class="clearfix rounded" type="text" name="cantidad-prod" id="cantidad-prod" placeholder="Cantidad" required/>
 	          	</div>
 
 	          	<div class="col-xs-12">
 	           		<label class="clearfix" for='nombre'>Descripci&oacute;n:</label>
-						 <input class="clearfix rounded" type="text" name="descripcion" id="descripcion" placeholder="Descripci&oacute;n" required/>
+						 <input class="clearfix rounded" type="text" name="descripcion-prod" id="descripcion-prod" placeholder="Descripci&oacute;n" required/>
 	          	</div>
 	          	
 	           	<div class="col-xs-12">
 	           	<label class="clearfix" for='nombre'>Departamento:</label>
 	           	<div class="col-xs-12 select_join">
-	           	<select name="Ordenar" id="Ordenar">
-	           		<option value="NOMB">Carnicer&iacute;a</option>
-	           		<option value="ID">Abarrotes</option>
-	           		<option value="CANT">Verduler&iacute;a</option>
+	           	<select name="departamento" id="departamento">
+	           		<option value="1">Abarrotes</option>
+	           		<option value="2">Carnicer&iacute;a</option>
+	           		<option value="3">Verduler&iacute;a</option>
 	           	</select>
 	           </div>
 	           	</div>
@@ -154,7 +182,9 @@ $('#myModal').on('shown.bs.modal', function () {
 }
 
 </script>
-
+<?php
+include "php/config.php";
+?>
 </body>
 
 </html>

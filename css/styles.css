@@ -130,7 +130,7 @@ table.results tr.head td, table.results tr td{
 
 /* line 203, ../sass/default.scss */
 table.results tr:nth-child(even) {
-  background-color: #f4f4f4;
+  background-color: #e0e0e0;
 }
 /* line 206, ../sass/default.scss */
 table.results a.see {
@@ -166,6 +166,27 @@ table.results a.delete {
 .add-product-form{
   background: #FFF;
   min-height: 400px;
+}
+
+.message {
+  position: absolute;
+  width: 400px;
+  border-radius: 9px;
+  padding: 10px;
+  top: 26%;
+  left: 34%;
+  border: 3px solid;
+  text-align: center;
+}
+
+.true {
+  color: #fff;
+  background: #429B17;
+}
+
+.false {
+  color: #fff;
+  background: #ff0000;
 }
 
 @media (max-width: 549px) {
